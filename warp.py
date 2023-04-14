@@ -37,6 +37,10 @@ def install_warp():
     else:
         os.system("sudo rpm -ivh https://pkg.cloudflareclient.com/cloudflare-release-el8.rpm")
 
+    os.system("apt install cloudflare-warp")
+    os.system("warp-cli register")
+    os.system("warp-cli set-mode proxy")
+
 
 # 读取config.json文件
 def read_config():
@@ -96,6 +100,15 @@ else:
         print("开始安装warp......")
         install_warp()
     print("已安装warp!")
+
+    os.system("warp-cli connect")
+
+    print("检查是否连通chat.openai.com......")
+    if 0 == os.system("curl chat.openai.com --proxy socks5://127.0.0.1:40000"):
+        print("连通chat.openai.com成功！")
+
     config = read_config()
     modify_config(config)
     restart_xray()
+
+

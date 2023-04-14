@@ -12,6 +12,5 @@ ip被openai封禁的vps
 ## 运行
 使用root账户运行以下代码：
 ```shell
-curl -sSL https://raw.githubusercontent.com/xianlinyi/warp2chatgpt/master/warp2chatgpt
-.sh | bash
+curl -sSL https://raw.githubusercontent.com/xianlinyi/warp2chatgpt/master/warp2chatgpt.sh | bash
 ```

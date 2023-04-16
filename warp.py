@@ -67,6 +67,15 @@ def modify_config(config):
     elif 'domainStrategy' not in config['routing']:
         config['routing']['domainStrategy'] = 'AsIs'
 
+    if 'rules' in config['routing']:
+        config['routing'].append(
+            {
+                'type': 'field',
+                'domain': ['openai.com', 'ai.com'],
+                'outboundTag': 'WARP'
+            }
+        )
+
     # 向outbounds数组插入一个对象
     has_warp = False
     outbounds = config['outbounds']

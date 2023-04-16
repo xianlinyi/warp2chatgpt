@@ -68,11 +68,11 @@ def modify_config(config):
         config['routing']['domainStrategy'] = 'AsIs'
 
     # 向outbounds数组插入一个对象
-    has_warp = True
+    has_warp = False
     outbounds = config['outbounds']
     for item in outbounds:
         if 'tag' in item and item['tag'] == 'WARP':
-            has_warp = False
+            has_warp = True
 
     if not has_warp:
         config['outbounds'].append({

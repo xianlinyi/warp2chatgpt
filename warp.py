@@ -68,7 +68,7 @@ def modify_config(config):
         config['routing']['domainStrategy'] = 'AsIs'
 
     if 'rules' in config['routing']:
-        config['routing'].append(
+        config['routing']['rules'].append(
             {
                 'type': 'field',
                 'domain': ['openai.com', 'ai.com'],

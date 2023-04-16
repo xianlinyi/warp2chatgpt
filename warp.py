@@ -66,19 +66,27 @@ def modify_config(config):
     # 如果routing存在，但没有domainStrategy，就添加domainStrategy
     elif 'domainStrategy' not in config['routing']:
         config['routing']['domainStrategy'] = 'AsIs'
+
     # 向outbounds数组插入一个对象
-    config['outbounds'].append({
-        'tag': 'WARP',
-        'protocol': 'socks',
-        'settings': {
-            'servers': [
-                {
-                    'address': '127.0.0.1',
-                    'port': 40000
-                }
-            ]
-        }
-    })
+    has_warp = True
+    outbounds = config['outbounds']
+    for item in outbounds:
+        if 'tag' in item and item['tag'] == 'WARP':
+            has_warp = False
+
+    if not has_warp:
+        config['outbounds'].append({
+            'tag': 'WARP',
+            'protocol': 'socks',
+            'settings': {
+                'servers': [
+                    {
+                        'address': '127.0.0.1',
+                        'port': 40000
+                    }
+                ]
+            }
+        })
     # 保存修改后的config.json文件
     with open('/usr/local/etc/xray/config.json', 'w') as f:
         json.dump(config, f, indent=4)

@@ -72,6 +72,7 @@ def modify_config(config):
     outbounds = config['outbounds']
     for item in outbounds:
         if 'tag' in item and item['tag'] == 'WARP':
+            print(item)
             has_warp = True
 
     if not has_warp:
